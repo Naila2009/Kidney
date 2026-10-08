@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kidney Test - Test by Naila</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    padding:15px;
+    font-family:Arial,sans-serif;
+    background:#eef3f8;
+    color:#172033;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.10);
+}
+
+h1{
+    text-align:center;
+    margin-top:0;
+    color:#173b73;
+}
+
+h2{
+    line-height:1.4;
+}
+
+.by{
+    text-align:center;
+    font-weight:bold;
+    font-size:18px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #bbb;
+    border-radius:9px;
+    font-size:16px;
+    margin-top:8px;
+}
+
+.start{
+    width:100%;
+    padding:13px;
+    margin-top:12px;
+    background:#1769e0;
+    color:white;
+    border:0;
+    border-radius:9px;
+    font-size:17px;
+    cursor:pointer;
+}
+
+.subject{
+    display:inline-block;
+    padding:7px 12px;
+    background:#e7efff;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.option{
+    display:block;
+    width:100%;
+    text-align:left;
+    padding:14px;
+    margin:9px 0;
+    border:1px solid #ccd2da;
+    border-radius:10px;
+    background:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.option:hover{
+    background:#f3f6fa;
+}
+
+.correct{
+    background:#d9f6df !important;
+    border-color:#28a745 !important;
+}
+
+.wrong{
+    background:#ffdede !important;
+    border-color:#dc3545 !important;
+}
+
+.feedback{
+    padding:12px;
+    border-radius:9px;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+.next{
+    display:none;
+    margin-top:10px;
+    padding:12px 20px;
+    border:0;
+    border-radius:9px;
+    background:#1769e0;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#testArea{
+    display:none;
+}
+
+#result{
+    display:none;
+}
+
+.resultBox{
+    background:#f1f6ff;
+    padding:15px;
+    border-radius:10px;
+    margin:12px 0;
+}
+
+.wrongExplanation{
+    border-left:5px solid #dc3545;
+    background:#fff4f4;
+    padding:14px;
+    margin:12px 0;
+    border-radius:8px;
+}
+
+.restart{
+    padding:12px 20px;
+    border:0;
+    border-radius:9px;
+    background:#333;
+    color:white;
+    font-size:16px;
+}
+
+.small{
+    color:#667085;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- START PAGE -->
+
+<div class="card" id="startPage">
+
+<h1>🧬 KIDNEY TEST</h1>
+
+<p class="by">Test by Naila</p>
+
+<p style="text-align:center">
+Class 11 Biology — Kidney / Excretion
+</p>
+
+<p style="text-align:center">
+<b>180 MCQs</b>
+</p>
+
+<label><b>Student Name:</b></label>
+
+<input
+    type="text"
+    id="studentName"
+    placeholder="Enter your name"
+>
+
+<button class="start" onclick="startTest()">
+Start Test
+</button>
+
+<p class="small">
+This is an offline test. No internet connection is required.
+</p>
+
+</div>
+
+
+<!-- TEST -->
+
+<div id="testArea">
+
+<div class="card">
+
+<h1>🧬 KIDNEY TEST</h1>
+
+<p class="by">Test by Naila</p>
+
+<p>
+<b>Student:</b>
+<span id="showName"></span>
+</p>
+
+<p id="progress"></p>
+
+</div>
+
+
+<div class="card">
+
+<span id="topic" class="subject">
+Kidney / Excretion
+</span>
+
+<h2 id="question"></h2>
+
+<div id="options"></div>
+
+<div id="feedback"></div>
+
+<button id="nextBtn" class="next">
+Next Question
+</button>
+
+</div>
+
+</div>
+
+
+<!-- RESULT -->
+
+<div class="card" id="result">
+
+<h1>🎉 Test Complete</h1>
+
+<h2 id="finalStudent"></h2>
+
+<div class="resultBox">
+<h2 id="score"></h2>
+<h2 id="percentage"></h2>
+</div>
+
+<h3>📊 Test Result</h3>
+
+<div id="resultMessage"></div>
+
+<h3>❌ Wrong MCQs & Explanations</h3>
+
+<div id="wrongList"></div>
+
+<button class="restart" onclick="location.reload()">
+Restart Test
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   180 KIDNEY / EXCRETION MCQs
+===================================================== */
+
+const questions = [
+
+/* 1-20 BASIC KIDNEY */
+
+{
+q:"The main organ responsible for urine formation is:",
+o:["Liver","Kidney","Heart","Lung"],
+a:1,
+e:"Kidneys filter the blood and form urine. The liver, heart and lungs have different major functions."
+},
+
+{
+q:"The functional unit of kidney is called:",
+o:["Neuron","Nephron","Alveolus","Villus"],
+a:1,
+e:"The nephron is the structural and functional unit of the kidney."
+},
+
+{
+q:"Humans normally have how many kidneys?",
+o:["One","Two","Three","Four"],
+a:1,
+e:"A healthy human normally has two kidneys, one on each side of the vertebral column."
+},
+
+{
+q:"Kidneys are located mainly in the:",
+o:["Thoracic cavity","Abdominal cavity","Cranial cavity","Pelvic cavity only"],
+a:1,
+e:"The kidneys are retroperitoneal organs located in the posterior part of the abdominal region."
+},
+
+{
+q:"The outer region of kidney is called:",
+o:["Medulla","Cortex","Pelvis","Ureter"],
+a:1,
+e:"The renal cortex is the outer region of the kidney."
+},
+
+{
+q:"The inner region of kidney is called:",
+o:["Cortex","Medulla","Capsule","Urethra"],
+a:1,
+e:"The renal medulla lies inside the renal cortex."
+},
+
+{
+q:"The funnel-shaped part of kidney that collects urine is:",
+o:["Renal pelvis","Renal artery","Cortex","Glomerulus"],
+a:0,
+e:"The renal pelvis collects urine from the renal pyramids and continues into the ureter."
+},
+
+{
+q:"Urine passes from kidney to urinary bladder through the:",
+o:["Urethra","Ureter","Renal vein","Aorta"],
+a:1,
+e:"The ureter carries urine from each kidney to the urinary bladder."
+},
+
+{
+q:"Urine leaves the body through the:",
+o:["Ureter","Urethra","Renal artery","Nephron"],
+a:1,
+e:"The urethra is the tube through which urine exits the body."
+},
+
+{
+q:"The blood vessel bringing blood to the kidney is the:",
+o:["Renal artery","Renal vein","Ureter","Vena cava"],
+a:0,
+e:"The renal artery brings blood to the kidney for filtration."
+},
+
+{
+q:"The blood vessel carrying filtered blood away from the kidney is the:",
+o:["Renal artery","Renal vein","Ureter","Urethra"],
+a:1,
+e:"The renal vein carries blood away from the kidney."
+},
+
+{
+q:"The kidney helps maintain:",
+o:["Homeostasis","Only digestion","Only vision","Only hearing"],
+a:0,
+e:"Kidneys maintain homeostasis by regulating water, ions, pH and removing metabolic wastes."
+},
+
+{
+q:"The major nitrogenous waste in human urine is:",
+o:["Urea","Glucose","Oxygen","Starch"],
+a:0,
+e:"Urea is the major nitrogenous waste excreted by humans."
+},
+
+{
+q:"Urea is mainly produced in the:",
+o:["Liver","Kidney","Heart","Lung"],
+a:0,
+e:"The liver converts toxic ammonia into urea through the urea cycle."
+},
+
+{
+q:"The process of removing metabolic wastes from the body is called:",
+o:["Excretion","Digestion","Ingestion","Respiration"],
+a:0,
+e:"Excretion is the removal of metabolic waste products from the body."
+},
+
+{
+q:"The urinary bladder mainly:",
+o:["Produces urine","Stores urine","Filters blood","Produces urea"],
+a:1,
+e:"The urinary bladder stores urine temporarily before it is expelled."
+},
+
+{
+q:"The kidneys receive a large amount of:",
+o:["Blood","Air","Bile","Lymph only"],
+a:0,
+e:"Kidneys receive a high blood flow because they continuously filter blood."
+},
+
+{
+q:"The renal artery branches into smaller:",
+o:["Arterioles","Ureters","Bronchi","Villi"],
+a:0,
+e:"The renal artery branches into progressively smaller blood vessels supplying nephrons."
+},
+
+{
+q:"A nephron begins with the:",
+o:["Renal corpuscle","Ureter","Urinary bladder","Urethra"],
+a:0,
+e:"The nephron begins with the renal corpuscle, consisting of the glomerulus and Bowman's capsule."
+},
+
+{
+q:"The cup-shaped structure surrounding the glomerulus is:",
+o:["Bowman's capsule","Loop of Henle","Collecting duct","Ureter"],
+a:0,
+e:"Bowman's capsule surrounds the glomerulus and receives the filtrate."
+},
+
+
+/* 21-40 NEPHRON */
+
+{
+q:"The glomerulus is a network of:",
+o:["Capillaries","Neurons","Lymph vessels","Bronchi"],
+a:0,
+e:"The glomerulus is a tuft of blood capillaries inside Bowman's capsule."
+},
+
+{
+q:"Filtration of blood occurs mainly in the:",
+o:["Glomerulus","Ureter","Urinary bladder","Urethra"],
+a:0,
+e:"Glomerular filtration occurs as blood is filtered through the glomerular capillaries."
+},
+
+{
+q:"The first step in urine formation is:",
+o:["Glomerular filtration","Urination","Digestion","Sweating"],
+a:0,
+e:"Urine formation begins with glomerular filtration."
+},
+
+{
+q:"The proximal convoluted tubule is commonly abbreviated as:",
+o:["PCT","DCT","ADH","ATP"],
+a:0,
+e:"PCT stands for proximal convoluted tubule."
+},
+
+{
+q:"The distal convoluted tubule is commonly abbreviated as:",
+o:["DCT","PCT","DNA","RNA"],
+a:0,
+e:"DCT stands for distal convoluted tubule."
+},
+
+{
+q:"The nephron segment between PCT and DCT is the:",
+o:["Loop of Henle","Renal pelvis","Ureter","Bowman's capsule"],
+a:0,
+e:"The loop of Henle connects the proximal and distal portions of the nephron."
+},
+
+{
+q:"The Loop of Henle is important in:",
+o:["Concentrating urine","Producing bile","Digesting proteins","Pumping blood"],
+a:0,
+e:"The Loop of Henle helps establish the osmotic gradient needed to concentrate urine."
+},
+
+{
+q:"The collecting duct receives fluid from:",
+o:["Distal tubules","Heart","Liver","Ureter only"],
+a:0,
+e:"Collecting ducts receive tubular fluid from distal convoluted tubules."
+},
+
+{
+q:"The renal corpuscle consists of:",
+o:["Glomerulus and Bowman's capsule","PCT and DCT","Ureter and bladder","Cortex and medulla"],
+a:0,
+e:"The renal corpuscle consists of the glomerulus enclosed by Bowman's capsule."
+},
+
+{
+q:"The PCT is mainly involved in:",
+o:["Reabsorption","Urine storage","Blood pumping","Breathing"],
+a:0,
+e:"The proximal tubule reabsorbs large amounts of water, ions, glucose and amino acids."
+},
+
+{
+q:"Useful substances are returned to blood by:",
+o:["Reabsorption","Filtration only","Urination","Exhalation"],
+a:0,
+e:"Tubular reabsorption returns useful substances from filtrate to the blood."
+},
+
+{
+q:"Secretion in nephron means movement of substances:",
+o:["From blood into tubule","From tubule into blood only","From bladder into kidney","From air into blood"],
+a:0,
+e:"Tubular secretion moves selected substances from blood into the tubular fluid."
+},
+
+{
+q:"Which substance is normally completely reabsorbed in a healthy kidney?",
+o:["Glucose","Urea","Creatinine","Some drugs"],
+a:0,
+e:"Normally, filtered glucose is almost completely reabsorbed in the proximal tubule."
+},
+
+{
+q:"A healthy person's urine normally contains:",
+o:["Urea","Large amounts of glucose","Large proteins","Red blood cells"],
+a:0,
+e:"Normal urine contains urea and other wastes, but normally lacks significant glucose and proteins."
+},
+
+{
+q:"The collecting duct carries urine toward the:",
+o:["Renal pelvis","Heart","Liver","Lung"],
+a:0,
+e:"Collecting ducts drain urine toward the renal pelvis."
+},
+
+{
+q:"The renal pyramids are found in the:",
+o:["Medulla","Cortex","Bladder","Ureter"],
+a:0,
+e:"Renal pyramids are cone-shaped structures located in the renal medulla."
+},
+
+{
+q:"Renal columns are extensions of:",
+o:["Cortex","Ureter","Bladder","Medulla only"],
+a:0,
+e:"Renal columns are cortical tissue extending between renal pyramids."
+},
+
+{
+q:"The nephron's blood supply includes the:",
+o:["Afferent and efferent arterioles","Ureter and urethra","Bronchi and alveoli","Bile ducts"],
+a:0,
+e:"Afferent and efferent arterioles regulate blood flow into and out of the glomerulus."
+},
+
+{
+q:"The afferent arteriole carries blood:",
+o:["Toward glomerulus","Away from glomerulus","Toward bladder","Toward ureter"],
+a:0,
+e:"The afferent arteriole brings blood into the glomerulus."
+},
+
+{
+q:"The efferent arteriole carries blood:",
+o:["Away from glomerulus","Into glomerulus","Into bladder","Into ureter"],
+a:0,
+e:"The efferent arteriole carries blood away from the glomerulus."
+},
+
+
+/* 41-60 FILTRATION */
+
+{
+q:"Glomerular filtration is driven mainly by:",
+o:["Blood pressure","Air pressure","Muscle contraction","Bile pressure"],
+a:0,
+e:"High hydrostatic blood pressure in glomerular capillaries drives filtration."
+},
+
+{
+q:"Large plasma proteins normally:",
+o:["Remain in blood","Pass freely into filtrate","Become glucose","Become oxygen"],
+a:0,
+e:"The filtration barrier normally prevents large plasma proteins from entering the filtrate."
+},
+
+{
+q:"Blood cells normally:",
+o:["Remain in blood","Enter filtrate freely","Become urea","Become water"],
+a:0,
+e:"Blood cells are too large to normally cross the glomerular filtration barrier."
+},
+
+{
+q:"The filtrate first enters:",
+o:["Bowman's capsule","Ureter","Bladder","Urethra"],
+a:0,
+e:"Glomerular filtrate collects in Bowman's capsule before entering the proximal tubule."
+},
+
+{
+q:"Glomerular filtrate is similar to plasma but normally lacks:",
+o:["Large proteins and cells","Water","Ions","Glucose"],
+a:0,
+e:"The filtrate contains water and small solutes but normally lacks blood cells and most large proteins."
+},
+
+{
+q:"GFR stands for:",
+o:["Glomerular filtration rate","General fluid regulation","Glucose filtration reaction","Glomerular fluid response"],
+a:0,
+e:"GFR means glomerular filtration rate, the rate at which filtrate is formed by the kidneys."
+},
+
+{
+q:"A decrease in renal blood pressure generally causes GFR to:",
+o:["Decrease","Increase greatly","Stay always identical","Become zero immediately"],
+a:0,
+e:"Lower glomerular pressure generally reduces filtration rate."
+},
+
+{
+q:"The filtration barrier includes specialized cells called:",
+o:["Podocytes","Neurons","Osteocytes","Hepatocytes"],
+a:0,
+e:"Podocytes form part of the filtration barrier around glomerular capillaries."
+},
+
+{
+q:"Podocytes are associated with:",
+o:["Bowman's capsule","Urinary bladder","Ureter","Liver"],
+a:0,
+e:"Podocyte processes surround glomerular capillaries and help form filtration slits."
+},
+
+{
+q:"The filtration slits help regulate passage of:",
+o:["Small molecules and fluid","Large bones","Whole cells","Food particles"],
+a:0,
+e:"Filtration slits contribute to selective filtration of small molecules and fluid."
+},
+
+{
+q:"Normal filtrate contains:",
+o:["Water and small solutes","Whole red blood cells","Large proteins","Whole platelets"],
+a:0,
+e:"Water, ions, glucose, amino acids and wastes can enter normal glomerular filtrate."
+},
+
+{
+q:"The glomerulus is located inside:",
+o:["Bowman's capsule","Ureter","Bladder","Renal pelvis"],
+a:0,
+e:"Bowman's capsule surrounds the glomerulus."
+},
+
+{
+q:"The renal corpuscle is located mainly in the:",
+o:["Cortex","Medulla","Pelvis","Ureter"],
+a:0,
+e:"Renal corpuscles are located in the renal cortex."
+},
+
+{
+q:"Most nephrons are called:",
+o:["Cortical nephrons","Pelvic nephrons","Bladder nephrons","Ureteric nephrons"],
+a:0,
+e:"Most nephrons are cortical nephrons with relatively short loops of Henle."
+},
+
+{
+q:"Juxtamedullary nephrons have:",
+o:["Long loops of Henle","No glomerulus","No tubule","No blood supply"],
+a:0,
+e:"Juxtamedullary nephrons have long loops extending deep into the medulla and are important for concentrating urine."
+},
+
+{
+q:"The main function of long loops of Henle is to help:",
+o:["Concentrate urine","Digest proteins","Pump blood","Make bile"],
+a:0,
+e:"Long loops of Henle help establish the medullary osmotic gradient."
+},
+
+{
+q:"The vasa recta are associated particularly with:",
+o:["Juxtamedullary nephrons","Bladder muscles","Liver cells","Lung tissue"],
+a:0,
+e:"Vasa recta are specialized capillaries associated with juxtamedullary nephrons."
+},
+
+{
+q:"The renal cortex contains many:",
+o:["Glomeruli","Urinary bladders","Ureters","Alveoli"],
+a:0,
+e:"The renal cortex contains renal corpuscles and much of the convoluted tubules."
+},
+
+{
+q:"The renal medulla contains many:",
+o:["Loops of Henle and collecting ducts","Glomeruli only","Ureters only","Bladders"],
+a:0,
+e:"The medulla contains loops of Henle, collecting ducts and associated vessels."
+},
+
+{
+q:"The final urine is formed after:",
+o:["Filtration, reabsorption and secretion","Digestion only","Respiration only","Photosynthesis"],
+a:0,
+e:"Urine formation involves glomerular filtration, tubular reabsorption and tubular secretion."
+},
+
+
+/* 61-80 REABSORPTION */
+
+{
+q:"Most reabsorption occurs in the:",
+o:["PCT","Ureter","Bladder","Urethra"],
+a:0,
+e:"The proximal convoluted tubule performs extensive reabsorption."
+},
+
+{
+q:"Glucose is normally reabsorbed mainly in the:",
+o:["PCT","Collecting duct","Ureter","Bladder"],
+a:0,
+e:"Filtered glucose is normally reabsorbed in the proximal convoluted tubule."
+},
+
+{
+q:"Amino acids are normally reabsorbed mainly in the:",
+o:["PCT","Urethra","Bladder","Renal pelvis"],
+a:0,
+e:"Most filtered amino acids are reabsorbed in the proximal tubule."
+},
+
+{
+q:"Water reabsorption occurs in:",
+o:["Several nephron segments","Only bladder","Only ureter","Only urethra"],
+a:0,
+e:"Water is reabsorbed in multiple nephron segments, with regulation by ADH especially in the collecting ducts."
+},
+
+{
+q:"Active transport requires:",
+o:["Energy","No energy ever","Only oxygen gas","Only light"],
+a:0,
+e:"Active transport uses cellular energy, usually ATP, to move substances against gradients."
+},
+
+{
+q:"Sodium reabsorption is important for:",
+o:["Water balance","Hearing only","Vision only","Digestion only"],
+a:0,
+e:"Sodium handling strongly influences water balance and extracellular fluid volume."
+},
+
+{
+q:"The movement of water across a selectively permeable membrane is:",
+o:["Osmosis","Filtration only","Secretion","Digestion"],
+a:0,
+e:"Osmosis is movement of water across a selectively permeable membrane toward higher solute concentration."
+},
+
+{
+q:"Water follows sodium mainly because of:",
+o:["Osmotic gradients","DNA replication","Muscle contraction","Bile secretion"],
+a:0,
+e:"Sodium reabsorption creates osmotic gradients that promote water reabsorption."
+},
+
+{
+q:"Tubular secretion helps remove:",
+o:["Certain wastes and ions","All red blood cells","Bones","Food"],
+a:0,
+e:"Tubular secretion adds substances such as H+, K+ and certain drugs to tubular fluid."
+},
+
+{
+q:"Hydrogen ion secretion helps regulate:",
+o:["Blood pH","Body height","Vision","Hearing"],
+a:0,
+e:"The kidneys regulate acid-base balance partly by secreting hydrogen ions."
+},
+
+{
+q:"Bicarbonate reabsorption helps maintain:",
+o:["Acid-base balance","Bone length","Heart rate only","Body temperature only"],
+a:0,
+e:"Bicarbonate is an important blood buffer and its renal handling helps regulate pH."
+},
+
+{
+q:"The kidney can conserve water when the body is:",
+o:["Dehydrated","Fully hydrated only","Asleep only","Eating only"],
+a:0,
+e:"During dehydration, hormonal regulation increases water conservation by the kidneys."
+},
+
+{
+q:"Concentrated urine contains relatively:",
+o:["More solute and less water","Only water","No urea","No ions"],
+a:0,
+e:"Concentrated urine contains a higher concentration of solutes and less water."
+},
+
+{
+q:"Dilute urine contains relatively:",
+o:["More water","More proteins","More blood cells","No water"],
+a:0,
+e:"Dilute urine contains a higher proportion of water."
+},
+
+{
+q:"The hormone that increases water reabsorption is:",
+o:["ADH","Insulin","Thyroxine","Glucagon"],
+a:0,
+e:"ADH increases water permeability of collecting ducts, promoting water reabsorption."
+},
+
+{
+q:"ADH is also called:",
+o:["Antidiuretic hormone","Antiglucose hormone","Antiblood hormone","Antiureter hormone"],
+a:0,
+e:"ADH stands for antidiuretic hormone."
+},
+
+{
+q:"ADH mainly acts on:",
+o:["Collecting ducts","Renal artery only","Bladder only","Urethra"],
+a:0,
+e:"ADH increases water permeability particularly in the late distal tubule and collecting ducts."
+},
+
+{
+q:"High ADH levels generally produce:",
+o:["More concentrated urine","More dilute urine","No urine","Protein-rich urine"],
+a:0,
+e:"High ADH promotes water reabsorption and therefore produces more concentrated urine."
+},
+
+{
+q:"Low ADH levels generally produce:",
+o:["More dilute urine","More concentrated urine","No filtration","More proteins"],
+a:0,
+e:"Low ADH reduces collecting-duct water permeability and produces more dilute urine."
+},
+
+{
+q:"A person who drinks a lot of water usually produces:",
+o:["More dilute urine","Very concentrated urine","No urine","Protein-rich urine"],
+a:0,
+e:"Excess water lowers ADH secretion, so more dilute urine is produced."
+},
+
+
+/* 81-100 HORMONAL REGULATION */
+
+{
+q:"ADH is released from the:",
+o:["Posterior pituitary","Kidney","Liver","Pancreas"],
+a:0,
+e:"ADH is released into the blood from the posterior pituitary."
+},
+
+{
+q:"ADH is synthesized mainly in the:",
+o:["Hypothalamus","Kidney","Liver","Thyroid"],
+a:0,
+e:"ADH is synthesized by neurons in the hypothalamus and transported to the posterior pituitary."
+},
+
+{
+q:"A rise in blood osmolarity usually causes ADH secretion to:",
+o:["Increase","Decrease to zero","Remain impossible","Stop permanently"],
+a:0,
+e:"Increased plasma osmolarity stimulates ADH release to conserve water."
+},
+
+{
+q:"A fall in blood osmolarity usually causes ADH secretion to:",
+o:["Decrease","Increase greatly","Become insulin","Become glucagon"],
+a:0,
+e:"Lower osmolarity reduces the stimulus for ADH secretion."
+},
+
+{
+q:"Aldosterone mainly increases reabsorption of:",
+o:["Sodium ions","Glucose only","Proteins","Red blood cells"],
+a:0,
+e:"Aldosterone promotes sodium reabsorption in the distal nephron."
+},
+
+{
+q:"Aldosterone also promotes secretion of:",
+o:["Potassium ions","Glucose","Proteins","Oxygen"],
+a:0,
+e:"Aldosterone increases potassium secretion by renal tubular cells."
+},
+
+{
+q:"Aldosterone is produced by the:",
+o:["Adrenal cortex","Posterior pituitary","Kidney cortex","Pancreas"],
+a:0,
+e:"Aldosterone is a mineralocorticoid produced by the adrenal cortex."
+},
+
+{
+q:"Renin is released by specialized kidney cells when renal perfusion is:",
+o:["Low","Always high","Unchanged only","Zero temperature"],
+a:0,
+e:"Low renal perfusion, low sodium delivery and sympathetic stimulation can stimulate renin release."
+},
+
+{
+q:"Renin is part of the:",
+o:["RAAS","Digestive system","Respiratory system","Visual system"],
+a:0,
+e:"Renin initiates the renin-angiotensin-aldosterone system."
+},
+
+{
+q:"RAAS helps regulate:",
+o:["Blood pressure and fluid balance","Vision only","Digestion only","Hearing only"],
+a:0,
+e:"RAAS increases sodium retention, water retention and vascular tone, helping regulate blood pressure and volume."
+},
+
+{
+q:"Angiotensin II generally causes:",
+o:["Vasoconstriction","Vasodilation only","Digestion","Urine storage"],
+a:0,
+e:"Angiotensin II is a potent vasoconstrictor and also stimulates aldosterone and ADH."
+},
+
+{
+q:"Angiotensin II stimulates release of:",
+o:["Aldosterone","Insulin only","Bile","Pepsin"],
+a:0,
+e:"Angiotensin II stimulates the adrenal cortex to release aldosterone."
+},
+
+{
+q:"Atrial natriuretic peptide tends to promote:",
+o:["Sodium excretion","Sodium retention","Glucose storage","Protein synthesis"],
+a:0,
+e:"ANP promotes sodium and water excretion and opposes some effects of RAAS."
+},
+
+{
+q:"The kidney contributes to regulation of:",
+o:["Blood pressure","Hair color only","Hearing only","Vision only"],
+a:0,
+e:"Kidneys regulate blood pressure through fluid balance and hormonal mechanisms such as RAAS."
+},
+
+{
+q:"The kidney helps regulate blood pH by controlling:",
+o:["H+ and bicarbonate","Only glucose","Only proteins","Only oxygen"],
+a:0,
+e:"Renal regulation of hydrogen ions and bicarbonate is essential for acid-base balance."
+},
+
+{
+q:"The kidney can produce new:",
+o:["Bicarbonate","Hemoglobin","Bile","Insulin"],
+a:0,
+e:"Renal processes generate new bicarbonate while excreting acids, helping maintain blood pH."
+},
+
+{
+q:"Ammonia in the kidney helps with:",
+o:["Acid excretion","Vision","Digestion","Blood clotting"],
+a:0,
+e:"Renal ammonium production allows hydrogen ions to be excreted effectively."
+},
+
+{
+q:"Erythropoietin is produced mainly by the:",
+o:["Kidney","Heart","Stomach","Pancreas"],
+a:0,
+e:"The kidneys produce erythropoietin in response to low oxygen availability."
+},
+
+{
+q:"Erythropoietin stimulates production of:",
+o:["Red blood cells","White blood cells only","Platelets only","Bile"],
+a:0,
+e:"Erythropoietin stimulates red blood cell production in bone marrow."
+},
+
+{
+q:"The kidney activates vitamin:",
+o:["D","C","K only","B12 only"],
+a:0,
+e:"Kidneys convert vitamin D to its active hormonal form, calcitriol."
+},
+
+
+/* 101-120 OSMOREGULATION */
+
+{
+q:"Osmoregulation means regulation of:",
+o:["Water and solute balance","Body height","Vision","Hearing"],
+a:0,
+e:"Osmoregulation maintains the appropriate balance of water and dissolved solutes."
+},
+
+{
+q:"The main organ of osmoregulation in humans is:",
+o:["Kidney","Lung","Skin only","Heart"],
+a:0,
+e:"The kidneys are the major organs responsible for regulating water and electrolyte balance."
+},
+
+{
+q:"The medullary osmotic gradient is important for:",
+o:["Urine concentration","Digestion","Blood clotting","Vision"],
+a:0,
+e:"The medullary gradient allows water to be reabsorbed from collecting ducts and helps concentrate urine."
+},
+
+{
+q:"The Loop of Henle has:",
+o:["Descending and ascending limbs","Only one limb","Three bladders","No tubules"],
+a:0,
+e:"The Loop of Henle consists of descending and ascending limbs with different permeabilities."
+},
+
+{
+q:"The descending limb is relatively permeable to:",
+o:["Water","Proteins","Blood cells","Large fats"],
+a:0,
+e:"The descending limb allows substantial water movement."
+},
+
+{
+q:"The ascending limb is relatively impermeable to:",
+o:["Water","Sodium","Chloride","Some ions"],
+a:0,
+e:"The ascending limb does not allow water to follow the solute transport."
+},
+
+{
+q:"The thick ascending limb actively transports mainly:",
+o:["Na+, K+ and Cl−","Glucose only","Proteins","Red blood cells"],
+a:0,
+e:"The thick ascending limb uses the Na-K-2Cl transporter to move sodium, potassium and chloride."
+},
+
+{
+q:"The countercurrent mechanism helps:",
+o:["Concentrate urine","Digest food","Produce bile","Move bones"],
+a:0,
+e:"Countercurrent multiplication in the Loop of Henle establishes the medullary gradient needed for concentrated urine."
+},
+
+{
+q:"The vasa recta help preserve the:",
+o:["Medullary gradient","Glucose level only","Blood cell count only","Lung volume"],
+a:0,
+e:"The vasa recta act as countercurrent exchangers and help maintain the medullary osmotic gradient."
+},
+
+{
+q:"Urea contributes to:",
+o:["Medullary osmotic gradient","Vision","Hearing","Muscle contraction"],
+a:0,
+e:"Urea recycling contributes significantly to the high osmolarity of the inner renal medulla."
+},
+
+{
+q:"During dehydration, urine volume usually:",
+o:["Decreases","Increases greatly","Remains exactly the same","Becomes zero"],
+a:0,
+e:"The body conserves water during dehydration, reducing urine volume."
+},
+
+{
+q:"During dehydration, urine concentration usually:",
+o:["Increases","Decreases greatly","Becomes zero","Contains no solutes"],
+a:0,
+e:"Higher ADH and water conservation produce more concentrated urine."
+},
+
+{
+q:"When blood osmolarity increases, osmoreceptors are stimulated in the:",
+o:["Hypothalamus","Kidney pelvis","Liver","Heart"],
+a:0,
+e:"Hypothalamic osmoreceptors detect changes in plasma osmolarity and regulate ADH release and thirst."
+},
+
+{
+q:"Thirst helps the body:",
+o:["Increase water intake","Lose all sodium","Stop filtration","Produce urea"],
+a:0,
+e:"Thirst encourages water intake when the body needs to restore fluid balance."
+},
+
+{
+q:"Excessive water intake can cause plasma osmolarity to:",
+o:["Decrease","Increase greatly","Remain impossible","Become zero"],
+a:0,
+e:"Excess water dilutes body fluids and lowers plasma osmolarity."
+},
+
+{
+q:"The kidney can excrete excess:",
+o:["Water","Only oxygen","Only proteins","Only glucose"],
+a:0,
+e:"Kidneys adjust urine volume to remove excess water."
+},
+
+{
+q:"The kidney regulates important ions such as:",
+o:["Na+ and K+","Only carbon","Only oxygen","Only nitrogen gas"],
+a:0,
+e:"Renal regulation includes sodium, potassium, calcium, chloride and other electrolytes."
+},
+
+{
+q:"Potassium balance is especially important for:",
+o:["Nerve and muscle function","Hair color","Vision only","Digestion only"],
+a:0,
+e:"Potassium is essential for normal nerve impulses and muscle contraction, including cardiac function."
+},
+
+{
+q:"Calcium balance is regulated partly by:",
+o:["Kidneys","Hair follicles","Lungs only","Stomach only"],
+a:0,
+e:"The kidneys participate in calcium regulation through reabsorption and vitamin D activation."
+},
+
+{
+q:"The kidneys help regulate body fluid:",
+o:["Volume and composition","Color only","Temperature only","Shape only"],
+a:0,
+e:"Kidneys maintain extracellular fluid volume and chemical composition."
+},
+
+
+/* 121-140 URINE & EXCRETION */
+
+{
+q:"Normal urine is usually:",
+o:["Yellowish","Bright blue","Green","Black"],
+a:0,
+e:"Normal urine is typically pale yellow because of pigments such as urochrome."
+},
+
+{
+q:"The yellow color of urine is mainly due to:",
+o:["Urochrome pigments","Hemoglobin only","Chlorophyll","Bile salts only"],
+a:0,
+e:"Urochrome and related pigments give normal urine its yellow color."
+},
+
+{
+q:"Normal urine is mostly:",
+o:["Water","Protein","Fat","Blood"],
+a:0,
+e:"Water makes up the major portion of normal urine."
+},
+
+{
+q:"A normal urine component is:",
+o:["Urea","Large amounts of albumin","Red blood cells","Large amounts of glucose"],
+a:0,
+e:"Urea is a normal waste product found in urine."
+},
+
+{
+q:"Creatinine is a waste product associated mainly with:",
+o:["Muscle metabolism","Photosynthesis","Digestion of starch","Lung ventilation"],
+a:0,
+e:"Creatinine is produced from muscle creatine metabolism and is excreted by the kidneys."
+},
+
+{
+q:"Uric acid is a product of:",
+o:["Purine metabolism","Protein folding only","Photosynthesis","Fat digestion only"],
+a:0,
+e:"Uric acid is produced during breakdown of purine nucleotides."
+},
+
+{
+q:"A substance that should normally not be present in significant urine is:",
+o:["Glucose","Urea","Creatinine","Water"],
+a:0,
+e:"Significant glucose in urine can occur when blood glucose exceeds the kidney's reabsorptive capacity."
+},
+
+{
+q:"Protein in urine is called:",
+o:["Proteinuria","Glycosuria","Hematuria","Ketonemia"],
+a:0,
+e:"Proteinuria means abnormal protein loss in urine."
+},
+
+{
+q:"Glucose in urine is called:",
+o:["Glycosuria","Proteinuria","Hematuria","Uremia"],
+a:0,
+e:"Glycosuria means glucose is present in urine."
+},
+
+{
+q:"Blood in urine is called:",
+o:["Hematuria","Glycosuria","Proteinuria","Polyuria"],
+a:0,
+e:"Hematuria means blood is present in urine."
+},
+
+{
+q:"Excessive urine production is called:",
+o:["Polyuria","Anuria","Dysuria","Hematuria"],
+a:0,
+e:"Polyuria means abnormally large urine volume."
+},
+
+{
+q:"Painful urination is called:",
+o:["Dysuria","Polyuria","Anuria","Glycosuria"],
+a:0,
+e:"Dysuria refers to painful or difficult urination."
+},
+
+{
+q:"Very little urine production is called:",
+o:["Oliguria","Polyuria","Glycosuria","Proteinuria"],
+a:0,
+e:"Oliguria means unusually low urine output."
+},
+
+{
+q:"Almost complete absence of urine is called:",
+o:["Anuria","Polyuria","Dysuria","Hematuria"],
+a:0,
+e:"Anuria means extremely low or absent urine production."
+},
+
+{
+q:"The act of passing urine is called:",
+o:["Micturition","Filtration","Reabsorption","Secretion"],
+a:0,
+e:"Micturition is the process of emptying the urinary bladder."
+},
+
+{
+q:"The urinary bladder wall contains:",
+o:["Smooth muscle","Bone","Cartilage only","Skeletal muscle only"],
+a:0,
+e:"The detrusor muscle of the bladder wall is smooth muscle."
+},
+
+{
+q:"The urethra is different from the ureter because the urethra:",
+o:["Carries urine out of body","Carries urine from kidney to bladder","Filters blood","Makes urea"],
+a:0,
+e:"The urethra carries urine from the bladder to outside the body."
+},
+
+{
+q:"Urine normally leaves the bladder through:",
+o:["Urethra","Ureter","Renal artery","Renal vein"],
+a:0,
+e:"Urine exits the bladder through the urethra."
+},
+
+{
+q:"The urinary system includes kidneys, ureters, bladder and:",
+o:["Urethra","Liver","Lungs","Pancreas"],
+a:0,
+e:"The four main parts of the urinary system are kidneys, ureters, urinary bladder and urethra."
+},
+
+
+/* 141-160 DISORDERS */
+
+{
+q:"A common cause of kidney stones is crystallization of:",
+o:["Mineral salts","Oxygen","Proteins only","Glucose only"],
+a:0,
+e:"Kidney stones can form when dissolved mineral salts crystallize in the urinary tract."
+},
+
+{
+q:"Kidney stones may cause:",
+o:["Severe pain","Better filtration always","Increased vision","Improved digestion"],
+a:0,
+e:"Stones can obstruct the urinary tract and cause significant pain."
+},
+
+{
+q:"A condition involving inflammation of kidney tissue is:",
+o:["Nephritis","Gastritis","Bronchitis","Dermatitis"],
+a:0,
+e:"Nephritis refers to inflammation of the kidney."
+},
+
+{
+q:"Failure of kidneys to adequately perform their functions is:",
+o:["Renal failure","Lung failure","Liver digestion","Anemia only"],
+a:0,
+e:"Renal failure occurs when kidneys cannot adequately remove wastes and regulate body fluids."
+},
+
+{
+q:"Dialysis is used mainly when:",
+o:["Kidneys cannot adequately remove wastes","Heart beats too fast","Lungs are normal","Digestion is slow"],
+a:0,
+e:"Dialysis can replace some kidney functions by removing wastes and excess fluid from blood."
+},
+
+{
+q:"Hemodialysis filters blood using:",
+o:["An artificial membrane","The stomach","The lungs","The bladder"],
+a:0,
+e:"Hemodialysis passes blood through a dialyzer containing a semipermeable membrane."
+},
+
+{
+q:"In hemodialysis, waste moves from blood into:",
+o:["Dialysis fluid","Bone","Air","Bile"],
+a:0,
+e:"Waste solutes diffuse from blood across the membrane into dialysis fluid."
+},
+
+{
+q:"Peritoneal dialysis uses the:",
+o:["Peritoneum","Pleura","Skin","Cornea"],
+a:0,
+e:"The peritoneal membrane acts as the exchange surface in peritoneal dialysis."
+},
+
+{
+q:"A kidney transplant replaces a failed kidney with:",
+o:["A healthy donor kidney","A lung","A liver only","A piece of bone"],
+a:0,
+e:"Kidney transplantation involves placing a functioning donor kidney into a patient with kidney failure."
+},
+
+{
+q:"Diabetes can damage kidneys over time through:",
+o:["Chronic high blood glucose","Low oxygen only","Cold weather","Exercise only"],
+a:0,
+e:"Long-term high blood glucose can damage renal blood vessels and filtering structures."
+},
+
+{
+q:"High blood pressure can damage:",
+o:["Kidney blood vessels and nephrons","Hair only","Eyes only","Bones only"],
+a:0,
+e:"Persistent hypertension can damage renal blood vessels and glomeruli."
+},
+
+{
+q:"A substance commonly measured to assess kidney filtration is:",
+o:["Creatinine","Oxygen","Chlorophyll","Insulin"],
+a:0,
+e:"Blood creatinine is commonly used as an indicator of kidney filtration function."
+},
+
+{
+q:"An increase in blood creatinine may indicate:",
+o:["Reduced kidney filtration","Better kidney function always","Increased digestion","Improved vision"],
+a:0,
+e:"Reduced filtration can cause creatinine to accumulate in the blood."
+},
+
+{
+q:"Edema may occur in kidney disease because of:",
+o:["Fluid retention","Excess hair growth","Improved filtration","More oxygen intake"],
+a:0,
+e:"Kidney dysfunction can cause sodium and water retention, contributing to edema."
+},
+
+{
+q:"Uremia refers to:",
+o:["Accumulation of nitrogenous wastes in blood","Low blood sugar","High oxygen","Low temperature"],
+a:0,
+e:"Uremia is a condition in which nitrogenous waste products accumulate in the blood, usually due to severe renal dysfunction."
+},
+
+{
+q:"Kidney infection is also called:",
+o:["Pyelonephritis","Dermatitis","Arthritis","Gastritis"],
+a:0,
+e:"Pyelonephritis is an infection and inflammation involving the kidney, often caused by bacteria."
+},
+
+{
+q:"A urinary tract infection commonly affects:",
+o:["Urinary system","Only brain","Only bones","Only skin"],
+a:0,
+e:"UTIs can involve the urethra, bladder, ureters or kidneys."
+},
+
+{
+q:"A common symptom of urinary infection is:",
+o:["Burning during urination","Improved vision","Hair loss only","Increased height"],
+a:0,
+e:"Burning or pain during urination is a common symptom of urinary tract infection."
+},
+
+{
+q:"Kidney disease can affect the body's:",
+o:["Electrolyte balance","Hair color only","Eye color only","Finger length"],
+a:0,
+e:"Kidneys regulate electrolytes such as sodium and potassium, so kidney disease can disturb electrolyte balance."
+},
+
+{
+q:"Severe kidney failure may require:",
+o:["Dialysis or transplantation","Only eye drops","Only vitamins","Only exercise"],
+a:0,
+e:"Advanced kidney failure may require renal replacement therapy such as dialysis or kidney transplantation."
+},
+
+
+/* 161-180 MIXED REVISION */
+
+{
+q:"Which structure carries blood into the glomerulus?",
+o:["Afferent arteriole","Efferent arteriole","Ureter","Urethra"],
+a:0,
+e:"The afferent arteriole carries blood into the glomerulus."
+},
+
+{
+q:"Which structure carries blood away from the glomerulus?",
+o:["Efferent arteriole","Afferent arteriole","Ureter","Renal pelvis"],
+a:0,
+e:"The efferent arteriole carries blood away from the glomerulus."
+},
+
+{
+q:"Which process moves useful substances from filtrate back into blood?",
+o:["Reabsorption","Secretion","Filtration","Micturition"],
+a:0,
+e:"Tubular reabsorption returns useful substances from tubular fluid to blood."
+},
+
+{
+q:"Which process moves some substances from blood into tubular fluid?",
+o:["Secretion","Reabsorption","Micturition","Digestion"],
+a:0,
+e:"Tubular secretion transfers selected substances from peritubular blood into the nephron."
+},
+
+{
+q:"Which hormone decreases urine volume?",
+o:["ADH","Insulin","Glucagon","Thyroxine"],
+a:0,
+e:"ADH increases water reabsorption and therefore generally decreases urine volume."
+},
+
+{
+q:"Which hormone promotes sodium reabsorption?",
+o:["Aldosterone","ADH only","Insulin","Glucagon"],
+a:0,
+e:"Aldosterone increases sodium reabsorption in the distal nephron."
+},
+
+{
+q:"Which part of nephron is highly involved in selective reabsorption?",
+o:["PCT","Ureter","Bladder","Urethra"],
+a:0,
+e:"The PCT reabsorbs most filtered water, sodium and nutrients."
+},
+
+{
+q:"Which structure stores urine?",
+o:["Urinary bladder","Kidney cortex","Glomerulus","Renal artery"],
+a:0,
+e:"The urinary bladder temporarily stores urine."
+},
+
+{
+q:"Which organ produces urea?",
+o:["Liver","Kidney","Heart","Lung"],
+a:0,
+e:"The liver produces urea from ammonia; the kidneys then excrete it."
+},
+
+{
+q:"Which organ excretes most urea?",
+o:["Kidney","Heart","Stomach","Brain"],
+a:0,
+e:"The kidneys remove urea from the blood and excrete it in urine."
+},
+
+{
+q:"The renal pelvis opens into the:",
+o:["Ureter","Urethra","Renal artery","Renal vein"],
+a:0,
+e:"The renal pelvis narrows into the ureter."
+},
+
+{
+q:"The outermost covering of kidney is called:",
+o:["Renal capsule","Ureter","Renal pelvis","Glomerulus"],
+a:0,
+e:"The kidney is surrounded by a tough connective tissue renal capsule."
+},
+
+{
+q:"Which kidney region contains renal pyramids?",
+o:["Medulla","Cortex","Capsule","Pelvis"],
+a:0,
+e:"Renal pyramids are located in the renal medulla."
+},
+
+{
+q:"Which kidney region contains most renal corpuscles?",
+o:["Cortex","Medulla","Pelvis","Ureter"],
+a:0,
+e:"Renal corpuscles are located in the cortex."
+},
+
+{
+q:"Which waste results from protein metabolism?",
+o:["Urea","Oxygen","Glucose","Starch"],
+a:0,
+e:"Amino acid metabolism produces ammonia, which the liver converts into urea."
+},
+
+{
+q:"Which waste results from muscle metabolism?",
+o:["Creatinine","Glucose","Oxygen","Bile"],
+a:0,
+e:"Creatinine is produced from normal muscle creatine metabolism."
+},
+
+{
+q:"Which substance contributes to the kidney's ability to concentrate urine?",
+o:["Urea","Hemoglobin","Insulin","Bile"],
+a:0,
+e:"Urea recycling contributes to the high osmolarity of the renal medulla."
+},
+
+{
+q:"The kidneys help maintain blood pH by excreting:",
+o:["Hydrogen ions","Glucose only","Proteins","Red blood cells"],
+a:0,
+e:"Kidneys excrete hydrogen ions and regulate bicarbonate to maintain acid-base balance."
+},
+
+{
+q:"The kidney's role in homeostasis includes regulation of:",
+o:["Water, ions and pH","Only body height","Only eye color","Only hair color"],
+a:0,
+e:"Kidneys maintain internal chemical balance by regulating water, electrolytes and acid-base status."
+},
+
+{
+q:"The best description of the nephron is:",
+o:["Structural and functional unit of kidney","A blood cell","A hormone","A urinary disease"],
+a:0,
+e:"The nephron is the microscopic structural and functional unit responsible for urine formation."
+}
+
+];
+
+
+/* =====================================================
+   TEST VARIABLES
+===================================================== */
+
+let current = 0;
+let score = 0;
+let studentName = "";
+let wrongAnswers = [];
+
+
+/* =====================================================
+   START TEST
+===================================================== */
+
+function startTest(){
+
+    studentName =
+        document.getElementById("studentName").value.trim();
+
+    if(studentName === ""){
+
+        alert("Please enter student name.");
+
+        return;
+    }
+
+    document.getElementById("startPage")
+    .style.display = "none";
+
+    document.getElementById("testArea")
+    .style.display = "block";
+
+    document.getElementById("showName")
+    .textContent = studentName;
+
+    showQuestion();
+}
+
+
+/* =====================================================
+   SHOW QUESTION
+===================================================== */
+
+function showQuestion(){
+
+    let item = questions[current];
+
+    document.getElementById("progress")
+    .textContent =
+        "Question " +
+        (current + 1) +
+        " of " +
+        questions.length;
+
+    document.getElementById("question")
+    .textContent = item.q;
+
+    document.getElementById("options")
+    .innerHTML = "";
+
+    document.getElementById("feedback")
+    .innerHTML = "";
+
+    document.getElementById("nextBtn")
+    .style.display = "none";
+
+
+    item.o.forEach(function(option,index){
+
+        let button =
+            document.createElement("button");
+
+        button.className = "option";
+
+        button.textContent =
+            String.fromCharCode(65 + index)
+            + ". "
+            + option;
+
+        button.onclick =
+            function(){
+
+                checkAnswer(index,button);
+
+            };
+
+        document.getElementById("options")
+        .appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   CHECK ANSWER
+===================================================== */
+
+function checkAnswer(selected,button){
+
+    let item = questions[current];
+
+    let all =
+        document.querySelectorAll(".option");
+
+    all.forEach(function(btn){
+
+        btn.disabled = true;
+
+    });
+
+
+    if(selected === item.a){
+
+        score++;
+
+        button.classList.add("correct");
+
+        document.getElementById("feedback")
+        .innerHTML =
+            '<div style="background:#d9f6df;padding:12px;border-radius:8px;color:green">' +
+            "✓ Correct Answer!" +
+            "</div>";
+
+    }
+
+    else{
+
+        button.classList.add("wrong");
+
+        all[item.a]
+        .classList.add("correct");
+
+
+        wrongAnswers.push({
+
+            number: current + 1,
+
+            question: item.q,
+
+            selected:
+                item.o[selected],
+
+            correct:
+                item.o[item.a],
+
+            explanation:
+                item.e
+
+        });
+
+
+        document.getElementById("feedback")
+        .innerHTML =
+
+            '<div style="background:#fff0f0;padding:12px;border-radius:8px;color:#c62828">' +
+
+            "<b>✗ Wrong Answer</b><br><br>" +
+
+            "<b>Your answer:</b> " +
+            item.o[selected] +
+
+            "<br><br>" +
+
+            "<b>✓ Correct answer:</b> " +
+            item.o[item.a] +
+
+            "<br><br>" +
+
+            "<b>Explanation:</b> " +
+            item.e +
+
+            "</div>";
+
+    }
+
+
+    document.getElementById("nextBtn")
+    .style.display = "inline-block";
+
+
+    if(current === questions.length - 1){
+
+        document.getElementById("nextBtn")
+        .textContent = "Show Final Result";
+
+    }
+
+    else{
+
+        document.getElementById("nextBtn")
+        .textContent = "Next Question";
+
+    }
+
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+document.getElementById("nextBtn")
+.onclick = function(){
+
+    current++;
+
+    if(current < questions.length){
+
+        showQuestion();
+
+    }
+
+    else{
+
+        showResult();
+
+    }
+
+};
+
+
+/* =====================================================
+   FINAL RESULT
+===================================================== */
+
+function showResult(){
+
+    document.getElementById("testArea")
+    .style.display = "none";
+
+    document.getElementById("result")
+    .style.display = "block";
+
+
+    let percentage =
+        Math.round(
+            (score / questions.length) * 100
+        );
+
+
+    document.getElementById("finalStudent")
+    .textContent =
+        "Student: " + studentName;
+
+
+    document.getElementById("score")
+    .textContent =
+        "Score: " +
+        score +
+        " / " +
+        questions.length;
+
+
+    document.getElementById("percentage")
+    .textContent =
+        "Percentage: " +
+        percentage +
+        "%";
+
+
+    let message = "";
+
+    if(percentage >= 80){
+
+        message =
+            "🌟 Excellent performance! Keep it up.";
+
+    }
+
+    else if(percentage >= 60){
+
+        message =
+            "👍 Good performance. Keep practicing.";
+
+    }
+
+    else if(percentage >= 40){
+
+        message =
+            "📚 Keep studying and practice more MCQs.";
+
+    }
+
+    else{
+
+        message =
+            "💪 Don't worry. Revise the kidney chapter and try again.";
+
+    }
+
+
+    document.getElementById("resultMessage")
+    .innerHTML =
+        "<p><b>" +
+        message +
+        "</b></p>";
+
+
+    /* WRONG QUESTIONS */
+
+    let wrongHTML = "";
+
+
+    if(wrongAnswers.length === 0){
+
+        wrongHTML =
+            '<div style="background:#d9f6df;padding:15px;border-radius:9px">' +
+            "🎉 Excellent! You answered every MCQ correctly." +
+            "</div>";
+
+    }
+
+    else{
+
+        wrongAnswers.forEach(function(item){
+
+            wrongHTML +=
+
+            '<div class="wrongExplanation">' +
+
+            "<b>Question " +
+            item.number +
+            ":</b><br><br>" +
+
+            item.question +
+
+            "<br><br>" +
+
+            "<b>Your answer:</b> " +
+            item.selected +
+
+            "<br>" +
+
+            "<b>Correct answer:</b> " +
+            item.correct +
+
+            "<br><br>" +
+
+            "<b>Explanation:</b><br>" +
+            item.explanation +
+
+            "</div>";
+
+        });
+
+    }
+
+
+    document.getElementById("wrongList")
+    .innerHTML = wrongHTML;
+
+}
+
+</script>
+
+</body>
+</html>
